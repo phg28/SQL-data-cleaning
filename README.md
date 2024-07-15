@@ -29,8 +29,10 @@ This is an educational project on data cleaning and preparation using SQL. The o
 ```
 
 ### Copy all values from original table
+```sql
      INSERT INTO club_member_info_cleaned1
         SELECT * FROM club_member_info;
+```
 
 
 ### Trim and upper column full_name
