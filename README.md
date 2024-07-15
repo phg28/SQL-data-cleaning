@@ -36,8 +36,10 @@ This is an educational project on data cleaning and preparation using SQL. The o
 
 
 ### Trim and upper column full_name
-     UPDATE club_member_info_cleaned1 
-     SET full_name=TRIM(UPPER(full_name))    
+ ```sql
+    UPDATE club_member_info_cleaned1 
+     SET full_name=TRIM(UPPER(full_name))
+```   
 
 ### Replace empty values with NULL
 
