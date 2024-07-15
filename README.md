@@ -41,5 +41,24 @@ This is an educational project on data cleaning and preparation using SQL. The o
      SET full_name=TRIM(UPPER(full_name))
 ```   
 
-### Replace empty values with NULL
+## CHECK VALUES IN EACH COLUMNS & CLEANING
+
+### Martial Status
+```sql
+SELECT DISTINCT martial_status FROM club_member_info_cleaned1
+```
+#### Result
+|martial_status|
+|--------------|
+|married|
+|divorced|
+||
+|single|
+|divored|
+
+There are wrong values due to typos, let's correct it and set empty values to NULL values.
+
+
+
+
 
