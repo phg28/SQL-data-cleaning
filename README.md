@@ -16,7 +16,7 @@ This is an educational project on data cleaning and preparation using SQL. The o
 
 ### Copy the table
 ```sql
-     CREATE TABLE club_member_info_cleaned (
+     CREATE TABLE club_member_info_clean (
 	    full_name VARCHAR(50),
 	    age INTEGER,
 	    martial_status VARCHAR(50),
@@ -30,14 +30,14 @@ This is an educational project on data cleaning and preparation using SQL. The o
 
 ### Copy all values from original table
 ```sql
-     INSERT INTO club_member_info_cleaned
+     INSERT INTO club_member_info_clean
         SELECT * FROM club_member_info;
 ```
 
 
 ### Trim and upper column full_name
  ```sql
-    UPDATE club_member_info_cleaned
+    UPDATE club_member_info_clean
      SET full_name=TRIM(UPPER(full_name))
 ```   
 
@@ -45,7 +45,7 @@ This is an educational project on data cleaning and preparation using SQL. The o
 
 ### Martial Status
 ```sql
-SELECT DISTINCT martial_status FROM club_member_info_cleaned
+SELECT DISTINCT martial_status FROM club_member_info_clean
 ```
 #### Result
 |martial_status|
@@ -58,7 +58,7 @@ SELECT DISTINCT martial_status FROM club_member_info_cleaned
 
 There are wrong values due to typos, let's correct it and set empty values to NULL values.
 ```sql
-  UPDATE club_member_info_cleaned 
+  UPDATE club_member_info_clean 
   SET martial_status = CASE
 	WHEN martial_status = '' THEN NULL
 	WHEN martial_status = 'divored' THEN 'divorced'
@@ -66,14 +66,38 @@ There are wrong values due to typos, let's correct it and set empty values to NU
   END
 ```
 
+### Age
+Check age range
+```sql
+SELECT min(age) FROM club_member_info_clean
+```
+
+```sql
+SELECT * FROM club_member_info_clean WHERE age>90 limit 5
+```
+
+#### Result
+|min(age)|
+|--------|
+|18|
+
+|full_name|age|martial_status|email|phone|full_address|job_title|membership_date|
+|---------|---|--------------|-----|-----|------------|---------|---------------|
+|JORI SANZ|399|married|jsanz3i@google.cn|904-906-7537|99 West Crossing,Jacksonville,Florida|Professor|2/15/2012|
+|CARLYE GRAEBER|555|married|cgraeber6n@quantcast.com|214-345-1363|8 Dexter Junction,Dallas,Texas|Actuary|3/10/2021|
+|SHURWOOD STRUTLEY|544|married|sstrutley9w@craigslist.org|804-636-0234|7779 Main Road,Richmond,Virginia|Nuclear Power Engineer|6/30/2014|
+|CORBIN HILLAN|499|single|chillandg@time.com|267-229-4017|78 La Follette Trail,Philadelphia,Pennsylvania|Account Representative II|7/7/2021|
+|SMITTY BULMER|522|divorced|sbulmergm@addthis.com||23370 Forest Dale Street,Pittsburgh,Pennsylvania|VP Marketing|9/25/2017|
+
+
 ### Email
 Let's check empty values and trim.
 
 ```sql
-SELECT COUNT(*) FROM club_member_info_cleaned WHERE email = ''
+SELECT COUNT(*) FROM club_member_info_clean WHERE email = ''
 ```
 ```sql
-UPDATE club_member_info_cleaned
+UPDATE club_member_info_clean
 SET email=TRIM(email)
 ```
 
@@ -81,7 +105,7 @@ SET email=TRIM(email)
 Let's do the same steps with other columns: check the empty values then replace them with NULL, remove whitecases with TRIM, correct the LETTERCASE inconsistency. 
 
 ```sql
-UPDATE club_member_info_cleaned 
+UPDATE club_member_info_clean 
 SET phone = CASE
   WHEN phone ='' THEN NULL 
   ELSE trim(phone) 
@@ -89,7 +113,7 @@ END
 ```
 
 ```sql
-UPDATE club_member_info_cleaned 
+UPDATE club_member_info_clean 
 SET full_address = CASE
   WHEN full_address ='' THEN NULL 
   ELSE trim(lower(full_address))
@@ -97,7 +121,7 @@ END
 ```
 
 ```sql
-UPDATE club_member_info_cleaned 
+UPDATE club_member_info_clean 
 SET job_title = CASE
   WHEN job_title ='' THEN NULL 
   ELSE trim(lower(job_title))
@@ -105,7 +129,7 @@ END
 ```
 
 ```sql
-UPDATE club_member_info_cleaned 
+UPDATE club_member_info_clean
 SET membership_date = CASE
   WHEN membership_date ='' THEN NULL 
   ELSE trim(lower(membership_date))
