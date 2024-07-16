@@ -16,7 +16,7 @@ This is an educational project on data cleaning and preparation using SQL. The o
 
 ### Copy the table
 ```sql
-     CREATE TABLE club_member_info_cleaned1 (
+     CREATE TABLE club_member_info_cleaned (
 	    full_name VARCHAR(50),
 	    age INTEGER,
 	    martial_status VARCHAR(50),
@@ -30,14 +30,14 @@ This is an educational project on data cleaning and preparation using SQL. The o
 
 ### Copy all values from original table
 ```sql
-     INSERT INTO club_member_info_cleaned1
+     INSERT INTO club_member_info_cleaned
         SELECT * FROM club_member_info;
 ```
 
 
 ### Trim and upper column full_name
  ```sql
-    UPDATE club_member_info_cleaned1 
+    UPDATE club_member_info_cleaned
      SET full_name=TRIM(UPPER(full_name))
 ```   
 
@@ -45,7 +45,7 @@ This is an educational project on data cleaning and preparation using SQL. The o
 
 ### Martial Status
 ```sql
-SELECT DISTINCT martial_status FROM club_member_info_cleaned1
+SELECT DISTINCT martial_status FROM club_member_info_cleaned
 ```
 #### Result
 |martial_status|
@@ -57,7 +57,14 @@ SELECT DISTINCT martial_status FROM club_member_info_cleaned1
 |divored|
 
 There are wrong values due to typos, let's correct it and set empty values to NULL values.
-
+```sql
+  UPDATE club_member_info_cleaned 
+  SET martial_status = CASE
+	WHEN martial_status = '' THEN NULL
+	WHEN martial_status = 'divored' THEN 'divorced'
+	ELSE martial_status 
+  END
+```
 
 
 
