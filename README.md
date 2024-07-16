@@ -66,6 +66,17 @@ There are wrong values due to typos, let's correct it and set empty values to NU
   END
 ```
 
+### Email
+Let's check empty values and trim.
+
+```sql
+SELECT COUNT(*) FROM club_member_info_cleaned WHERE email = ''
+```
+```sql
+UPDATE club_member_info_cleaned
+SET email=TRIM(email)
+```
+
 
 
 
