@@ -120,6 +120,15 @@ SET membership_date = CASE
 END
 ```
 
+# Trim the text
+```sql
+UPDATE club_member_info_cleaned SET
+	phone = TRIM(phone),
+	full_address = TRIM(full_address),
+	job_title = TRIM(job_title),
+	membership_date  = TRIM(membership_date)
+```
+
 
 
 
