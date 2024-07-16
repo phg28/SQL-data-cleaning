@@ -89,6 +89,14 @@ SELECT * FROM club_member_info_clean WHERE age>90 limit 5
 |CORBIN HILLAN|499|single|chillandg@time.com|267-229-4017|78 La Follette Trail,Philadelphia,Pennsylvania|Account Representative II|7/7/2021|
 |SMITTY BULMER|522|divorced|sbulmergm@addthis.com||23370 Forest Dale Street,Pittsburgh,Pennsylvania|VP Marketing|9/25/2017|
 
+Some values are empty or out of range, let's put them to NULL.
+```sql
+UPDATE club_member_info_clean 
+SET age = CASE
+WHEN age ='' OR age>90 THEN NULL
+ELSE age
+END
+```
 
 ### Email
 Let's check empty values and trim.
