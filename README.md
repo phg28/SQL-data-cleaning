@@ -78,21 +78,13 @@ SET email=TRIM(email)
 ```
 
 ### Other columns
-Let's do the same steps with other columns: check the empty values then replace them with NULL and trim the text. 
+Let's do the same steps with other columns: check the empty values then replace them with NULL, remove whitecases with TRIM, correct the LETTERCASE inconsistency. 
 
 ```sql
 UPDATE club_member_info_cleaned 
 SET phone = CASE
   WHEN phone ='' THEN NULL 
-  ELSE phone 
-END
-```
-
-```sql
-UPDATE club_member_info_cleaned 
-SET phone = CASE
-  WHEN phone ='' THEN NULL 
-  ELSE phone 
+  ELSE trim(phone) 
 END
 ```
 
@@ -100,7 +92,7 @@ END
 UPDATE club_member_info_cleaned 
 SET full_address = CASE
   WHEN full_address ='' THEN NULL 
-  ELSE full_address 
+  ELSE trim(lower(full_address))
 END
 ```
 
@@ -108,7 +100,7 @@ END
 UPDATE club_member_info_cleaned 
 SET job_title = CASE
   WHEN job_title ='' THEN NULL 
-  ELSE job_title 
+  ELSE trim(lower(job_title))
 END
 ```
 
@@ -116,18 +108,11 @@ END
 UPDATE club_member_info_cleaned 
 SET membership_date = CASE
   WHEN membership_date ='' THEN NULL 
-  ELSE membership_date 
+  ELSE trim(lower(membership_date))
 END
 ```
 
-# Trim the text
-```sql
-UPDATE club_member_info_cleaned SET
-	phone = TRIM(phone),
-	full_address = TRIM(full_address),
-	job_title = TRIM(job_title),
-	membership_date  = TRIM(membership_date)
-```
+
 
 
 
